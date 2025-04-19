@@ -11,16 +11,17 @@ Student.prototype.setSubject = function (subjectName) {
 
 Student.prototype.addMarks = function (...marks) {
   if(this.hasOwnProperty("marks")){
-  this.marks = marks;
+  this.marks.push(...marks);
     }
+    
 }
 
 Student.prototype.getAverage = function () {
-    if(this.marks.length === 0) 
-    {
-        return 0;
+    if(this.hasOwnProperty("marks") && this.marks.length > 0){
+      let result = this.marks.reduce((x,y) => x+y)/this.marks.length;
+      return result;
     }
-  return this.marks.reduce((x,y) => x+y)/this.marks.length;
+    return 0;
 }
 
 Student.prototype.exclude = function (reason) {

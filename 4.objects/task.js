@@ -1,7 +1,7 @@
 function Student(name, gender, age) {
   this.name = name;
     this.age = age;
-    this.male = male;
+    this.gender = gender;
     this.marks = [];
 }
 
@@ -14,6 +14,10 @@ Student.prototype.addMarks = function (...marks) {
 }
 
 Student.prototype.getAverage = function () {
+    if(this.marks.length === 0) 
+    {
+        return 0;
+    }
   return this.marks.reduce((x,y) => x+y)/this.marks.length;
 }
 

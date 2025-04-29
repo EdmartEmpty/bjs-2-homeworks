@@ -8,8 +8,8 @@ class PrintEditionItem {
     }
 
     fix(){
-        if(this._state < 100 && this._state > 0){
-            this.state = this._state * 1.5;   
+        if(this.state < 100 && this.state > 0){
+            this.state = this.state * 1.5;   
         }
     }
  

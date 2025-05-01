@@ -8,9 +8,7 @@ class PrintEditionItem {
     }
 
     fix(){
-        // if(this.state < 100 && this.state > 0){
             this.state = this.state * 1.5;   
-        // }
     }
  
     set state(newState) {

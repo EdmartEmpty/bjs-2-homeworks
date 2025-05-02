@@ -16,20 +16,22 @@ function validateCount(string){
         this.a = a;
         this.b = b; 
         this.c = c;
-        if(a+b < c || a+c < b || b + c < a) throw new Error("Треугольник с такими сторонами не существует");
-        this._premetr = 0;
-        this._area = 0;
+        if(a+b < c || a+c < b || b + c < a) {
+            throw new Error("Треугольник с такими сторонами не существует");
+        }
+       
     }
 
     get perimeter() {
-        this._premetr = this.a+this.b+this.c;
-        return  this._premetr;
+       
+        return this.a+this.b+this.c;
     }
 
     get area(){
-        let p = 0.5 * (this.a+this.b+this.c);
-        this._area = Math.sqrt(p * (p-this.a)*(p-this.b)*(p-this.c)).toFixed(3);
-        return +this._area;
+        
+        let p = 0.5 * this.perimeter;
+        
+        return  +Math.sqrt(p * (p-this.a)*(p-this.b)*(p-this.c)).toFixed(3);
     }
  }
 
@@ -38,15 +40,14 @@ function validateCount(string){
         return new Triangle(a,b,c);;
     } catch (error) {
        let ErrorTriangle = {
-        _area: 0,
-        _premetr: 0,
+       
         get area(){
-            this._area = "Ошибка! Треугольник не существует";
-            return this._area;
+           
+            return "Ошибка! Треугольник не существует";
         },
         get perimeter(){
-            this._premetr = "Ошибка! Треугольник не существует";
-            return this._premetr;
+            
+            return "Ошибка! Треугольник не существует";
         }
        }
        return ErrorTriangle;

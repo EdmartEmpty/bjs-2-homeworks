@@ -11,6 +11,7 @@ class AlarmClock {
         for(let alarm of this.alarmCollection){
             if(alarm.time === time){
                 console.warn('Уже присутствует звонок на это же время');
+               
             }
         }
         let alarm = {time,callback,canCall:true};
@@ -29,26 +30,37 @@ class AlarmClock {
             return;
         }
 
-
-        function interval(){
-            console.log(typeof Array.from(this.alarmCollection));
-        //   alarmCollection.foreach(function(x){
-        //          if(x.time === getCurrentFormattedTime() && x.canCall === true){
-        //              x.callback();
-        //              x.canCall = false;
-        //          }
-        //      })
-            }
-           let cos =  interval.bind(this);
-           
-        setInterval(cos,1000);
-    }
+        let timeBinded = this.getCurrentFormattedTime.bind(this);
+        const chek = () => this.alarmCollection.forEach(
+            function(x)
+            {if(x.time === timeBinded() && x.canCall === true)
+                {
+                x.callback();
+                x.canCall = false;
+    
+                 }
+            });
+         
+        this.intervalId = setInterval(chek,1000);
+       
+       
+}
+        stop(){
+            clearInterval(this.intervalId);
+            this.intervalId = null;
+                };
+            
+         resetAllCalls() {
+                    this.alarmCollection.forEach(x => x.canCall = true);
+                }
+        clearAlarms (){
+                this.stop();
+                this.alarmCollection = [];
+                }
 }
 
-let t =  new AlarmClock();
-const l = function() {console.log("привет")};
 
-console.log(t.getCurrentFormattedTime());
-t.addClock("22:30",l);
 
-t.start();
+
+ 
+ 
